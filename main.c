@@ -11,35 +11,29 @@
 #include <string.h>
 #include "type.h"
 
-
-typedef struct var var;
-typedef struct table table;
-typedef struct tableseg tableseg;
-
-
-table *newTable (void);
-var *newVar (unsigned char type, void *value);
-void addToTable (table *tablep, var *varp);
-void rmvFromTable (table *tablep, unsigned int i);
-char *varValStr (var *varp);
+struct table_t *newTable (void);
+struct var_t *newVar (unsigned char type, void *value);
+void addToTable (struct table_t *tablep, struct var_t *varp);
+void rmvFromTable (struct table_t *tablep, unsigned int i);
+char *varValStr (struct var_t *varp);
 char *listToStr (void *value);
 char *boolToStr (void *value);
 char *tableToStr (void *value);
 char *numToStr (void *value);
 char *strToStr (void *value);
-void showTable (table *tablep);
+void showTable (struct table_t *tablep);
 
-struct table {
+struct table_t {
   unsigned int size;
-  struct tableseg *first;
+  struct tableseg_t *first;
 };
 
-struct tableseg {
-  struct var *varp;
-  struct tableseg *next;
+struct tableseg_t {
+  struct var_t *varp;
+  struct tableseg_t *next;
 };
 
-struct var {
+struct var_t {
   unsigned char type;
   void *value;
 };
@@ -63,10 +57,10 @@ int main (void)
   valStrFuncs[TYPE_TABLE] = tableToStr;
   
   /* Test */
-  table *table1 = newTable();
+  struct table_t *table1 = newTable();
   showTable(table1);
   double x = 9000.1;
-  var *var1 = newVar(TYPE_NUMBER, (void*)&x);
+  struct var_t *var1 = newVar(TYPE_NUMBER, (void*)&x);
   addToTable(table1, var1);
   showTable(table1);
   /* EOF Test */
@@ -75,38 +69,39 @@ int main (void)
 }
 
 
-table *newTable (void)
+struct table_t *newTable (void)
 {
-  table *tablep = (table*)malloc(sizeof(table));
+  struct table_t *tablep = (struct table_t *)malloc(sizeof(struct table_t));
   tablep->size = 0;
   return tablep;
 }
 
-var *newVar (unsigned char type, void *value)
+struct var_t *newVar (unsigned char type, void *value)
 {
-  var *varp = (var*)malloc(sizeof(var));
+  struct var_t *varp = (struct var_t *)malloc(sizeof(struct var_t));
   varp->type = type;
   varp->value = value;
   return varp;
 }
 
-void addToTable (table *tablep, var *varp)
+void addToTable (struct table_t *tablep, struct var_t *varp)
 {
   // Add to beginning of stack.
-  tableseg *newseg = (tableseg*)malloc(sizeof(tableseg));
+  struct tableseg_t *newseg =
+    (struct tableseg_t *)malloc(sizeof(struct tableseg_t));
   newseg->varp = varp;
   newseg->next = tablep->first;
   tablep->first = newseg;
   tablep->size += 1;
 }
 
-void rmvFromTable (table *tablep, unsigned int i)
+void rmvFromTable (struct table_t *tablep, unsigned int i)
 {
   if (i > tablep->size) {
     return;
   }
-  tableseg *before;
-  tableseg *after;
+  struct tableseg_t *before;
+  struct tableseg_t *after;
   before = tablep->first;
   int cnt;
   for (cnt=1; cnt<i-1; cnt++)
@@ -120,7 +115,7 @@ void rmvFromTable (table *tablep, unsigned int i)
   tablep->size -= 1;
 }
 
-char *varValStr (var *varp)
+char *varValStr (struct var_t *varp)
 {
   valStrFuncs[varp->type](varp->value);
 }
@@ -158,14 +153,14 @@ char *strToStr (void *value)
   return (char*)value;
 }
 
-void showTable (table *tablep)
+void showTable (struct table_t *tablep)
 {
   if (tablep->first == NULL) {
     puts("nothing in table");
     return;
   }
-  tableseg *cur;
-  var *varp;
+  struct tableseg_t *cur;
+  struct var_t *varp;
   for (cur = tablep->first; cur != NULL; cur = cur->next) {
     varp = cur->varp;
     char str[60];
