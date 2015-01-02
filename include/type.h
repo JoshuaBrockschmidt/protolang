@@ -1,3 +1,6 @@
+#ifndef PROTOLANG_TYPE_H
+#define PROTOLANG_TYPE_H
+
 #ifndef TYPE_BOOLEAN
 #define TYPE_BOOLEAN 0
 #endif
@@ -19,3 +22,5 @@
 #ifndef FALSE
 #define FALSE 0
 #endif
+
+#endif /* #ifndef PROTOLANG_TYPE_H */
