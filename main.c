@@ -166,14 +166,12 @@ void showTable (table *tablep)
   }
   tableseg *cur;
   var *varp;
-  cur = tablep->first;
-  while (cur != NULL) {
+  for (cur = tablep->first; cur != NULL; cur = cur->next) {
     varp = cur->varp;
     char str[60];
     strcpy(str, typenames[varp->type]);
     strcat(str, "\t");
     strcat(str, varValStr(varp));
     puts(str);
-    cur = cur->next;
   }
 }
