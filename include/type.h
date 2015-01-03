@@ -1,21 +1,14 @@
 #ifndef PROTOLANG_TYPE_H
 #define PROTOLANG_TYPE_H
 
-#ifndef TYPE_BOOLEAN
-#define TYPE_BOOLEAN 0
-#endif
-#ifndef TYPE_LIST
-#define TYPE_LIST    1
-#endif
-#ifndef TYPE_NUMBER
-#define TYPE_NUMBER  2
-#endif
-#ifndef TYPE_STRING
-#define TYPE_STRING  3
-#endif
-#ifndef TYPE_TABLE
-#define TYPE_TABLE   4
-#endif
+enum types_t {
+  TYPE_BOOLEAN = 0,
+  TYPE_LIST    = 1,
+  TYPE_NUMBER  = 2,
+  TYPE_STRING  = 3,
+  TYPE_TABLE   = 4,
+};
+
 #ifndef TRUE
 #define TRUE  1
 #endif
