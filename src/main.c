@@ -10,31 +10,28 @@
 #include <string.h>
 #include "types.h"
 
+var *newVar(unsigned char type, void *value);
 
-var *newVar (unsigned char type, void *value);
-
-
-int main (void)
+int main(void)
 {
-  initType_table();
-  
-  /* Test */
-  table *table1 = newTable();
-  showTable(table1);
-  double x = 1337.0314159265;
-  var *var1 = newVar(TYPE_NUMBER, (void*)&x);
-  addToTable(table1, var1);
-  showTable(table1);
-  /* EOF Test */
-  
-  return 0;
+	initType_table();
+
+	/* Test */
+	table *table1 = newTable();
+	showTable(table1);
+	double x = 1337.0314159265;
+	var *var1 = newVar(TYPE_NUMBER, (void *)&x);
+	addToTable(table1, var1);
+	showTable(table1);
+	/* EOF Test */
+
+	return 0;
 }
 
-
-var *newVar (unsigned char type, void *value)
+var *newVar(unsigned char type, void *value)
 {
-  var *varp = malloc(sizeof(var));
-  varp->type = type;
-  varp->value = value;
-  return varp;
+	var *varp = malloc(sizeof(var));
+	varp->type = type;
+	varp->value = value;
+	return varp;
 }
