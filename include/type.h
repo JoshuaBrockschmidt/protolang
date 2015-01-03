@@ -9,11 +9,8 @@ enum types_t {
   TYPE_TABLE   = 4,
 };
 
-#ifndef TRUE
+/* It seems we aren't using these #defines... maybe we should trash them? */
 #define TRUE  1
-#endif
-#ifndef FALSE
 #define FALSE 0
-#endif
 
 #endif /* #ifndef PROTOLANG_TYPE_H */
