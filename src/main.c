@@ -131,9 +131,9 @@ char *listToStr (void *value)
 char *boolToStr (void *value)
 {
   if ((char*)value == 0) {
-	  return (char *) "FALSE";
+    return (char *) "FALSE";
   } else {
-	  return (char *) "TRUE";
+    return (char *) "TRUE";
   }
 }
 
