@@ -10,13 +10,13 @@
 #define VAL_TRUE	!(FALSE)
 
 typedef struct var {
-  unsigned char type;
-  void *value;
+	unsigned char type;
+	void *value;
 } var;
 
 typedef struct table {
-  unsigned int size;
-  struct tableseg *first;
+	unsigned int size;
+	struct tableseg *first;
 } table;
 
 #endif /* #ifndef TYPE_H */
