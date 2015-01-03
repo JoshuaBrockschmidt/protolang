@@ -73,14 +73,14 @@ int main (void)
 
 struct table_t *newTable (void)
 {
-  struct table_t *tablep = (struct table_t *)malloc(sizeof(struct table_t));
+  struct table_t *tablep = malloc(sizeof(struct table_t));
   tablep->size = 0;
   return tablep;
 }
 
 struct var_t *newVar (unsigned char type, void *value)
 {
-  struct var_t *varp = (struct var_t *)malloc(sizeof(struct var_t));
+  struct var_t *varp = malloc(sizeof(struct var_t));
   varp->type = type;
   varp->value = value;
   return varp;
@@ -89,8 +89,7 @@ struct var_t *newVar (unsigned char type, void *value)
 void addToTable (struct table_t *tablep, struct var_t *varp)
 {
   // Add to beginning of stack.
-  struct tableseg_t *newseg =
-    (struct tableseg_t *)malloc(sizeof(struct tableseg_t));
+  struct tableseg_t *newseg = malloc(sizeof(struct tableseg_t));
   newseg->varp = varp;
   newseg->next = tablep->first;
   tablep->first = newseg;
